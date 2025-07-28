@@ -1,0 +1,5 @@
+name.firstName,name.lastName,age,address.line1,address.line2,address.city,address.state,gender,contact.email,contact.phone
+Rohit,Prasad,5,A-563 Rakshak Society,New Pune Road,Pune,Maharashtra,male,rohit.prasad@example.com,9876543210
+Jane,Doe,28,123 Main St,Apt 4B,New York,NY,female,jane.doe@example.com,1234567890
+John,Smith,61,789 Oak Ave,,Springfield,IL,male,john.smith@example.com,5551234567
+Alice,Wonder,62,Wonderland Lane,,Fantasyland,CA,female,alice.wonder@example.com,9998887777
