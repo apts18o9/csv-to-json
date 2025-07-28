@@ -8,7 +8,6 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
 })
 
-
 pool.connect()
     .then(client => {
         console.log('successfully connected to POSTGRE database');

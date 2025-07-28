@@ -1,37 +1,36 @@
 //file for parsing logic
 
-const fs = require('fs');
+const fs = require('fs').promises;
 
 const path = require('path')
 
-function setNestedProperty(obj, path, value){
+function setNestedProperty(obj, path, value) {
     const parts = path.split('.');
-    const current=  obj;
+    let current = obj;
 
-    for(let i = 0; i<parts.length; i++){
+    for (let i = 0; i < parts.length; i++) {
         const part = parts[i];
-
-        if(i === parts.length - 1){ //last part(single value)
-            current[path] = value;
-        }
-        else{
-            if(!current[path] || typeof current[path] !== 'object'){
-                current[path] = {};
+        if (i === parts.length - 1) {
+            // Last part, set the value
+            current[part] = value;
+        } else {
+            // Not the last part, navigate or create new nested object
+            if (!current[part] || typeof current[part] !== 'object') {
+                current[part] = {};
             }
-            current = current[path];
+            current = current[part];
         }
     }
 }
 
 
-async function parseCsvFile(filePath, delimiter = ','){
+async function parseCsvFile(filePath, delimiter = ',') {
     try {
-
-        const absolutePath = path.resolve(filePath)
-        const fileContent = await fs.readFile(absolutePath, {encoding: 'utf-8'})
+        const absolutePath = path.resolve(filePath);
+        const fileContent = await fs.readFile(absolutePath, { encoding: 'utf8' });
 
         const lines = fileContent.trim().split('\n');
-        if(lines.length === 0){
+        if (lines.length === 0) {
             return [];
         }
 
@@ -39,25 +38,27 @@ async function parseCsvFile(filePath, delimiter = ','){
         const dataRows = lines.slice(1);
 
         const parsedData = dataRows.map(row => {
-            const rows = row.split(delimiter).map(value => value.trim());
+            const values = row.split(delimiter).map(value => value.trim());
             const rowObject = {};
 
             headers.forEach((header, index) => {
                 const value = values[index];
-                if(value !== undefined && value !== null && value !== ''){
-                    setNestedProperty(rowObject, header,value);
+                if (value !== undefined && value !== null && value !== '') { // Only set if value exists
+                    setNestedProperty(rowObject, header, value);
                 }
             });
             return rowObject;
-        })
-        
+        });
+
+        console.log(`Successfully parsed ${parsedData.length} records from ${filePath}`);
+        return parsedData;
+
     } catch (error) {
-        console.error(`Error parsing CSV file: ${filePath}`, error.message);
-        throw new Error(`Failed to parse CSV: ${error.message}`)
-        
+        console.error(`Error parsing CSV file ${filePath}:`, error.message);
+        throw new Error(`Failed to parse CSV: ${error.message}`);
     }
 }
 
 module.exports = {
     parseCsvFile
-}
+};
