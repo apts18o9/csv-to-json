@@ -1,4 +1,4 @@
-//to display the age distribution graph
+//to display the age distribution in console(final output)
 
 const db = require('../config/db')
 
@@ -46,16 +46,18 @@ async function generateAgeDistributionReport(){
 
         //report 
         const report = [
-            `"AGE-GROUP, % DISTRIBUTION`,
-            `"<20", ${calculatePercentage(less20)}`,
-            `"20 to 40", ${calculatePercentage(twentyto40)}`,
-            `"40 to 60", ${calculatePercentage(fortyto60)}`,
-            `">60", ${calculatePercentage(more60)}`
+            `"AGE-GROUP, % DISTRIBUTION"`,
+            `"<20", ${calculatePercentage(less20)}%`,
+            `"20 to 40", ${calculatePercentage(twentyto40)}%`,
+            `"40 to 60", ${calculatePercentage(fortyto60)}%`,
+            `">60", ${calculatePercentage(more60)}%`
         ].join('\n');
 
 
         console.log('\n --- AGE DISTRIBUTION REPORT --- ');
         console.log(report);
+        console.log(`Data fetched successfully from ${totalUsers} entries`);
+        
         console.log('----------------------\n');
         
         

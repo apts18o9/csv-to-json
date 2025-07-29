@@ -3,7 +3,7 @@ require('dotenv').config();
 //testing
 const db = require('./src/config/db');
 const { parseCsvFile } = require('./src/utils/csvParser');
-
+//all imports
 const { transformUserData } = require('./src/utils/dataTransformer');
 const { insertUsers, clearUsersTable } = require('./src/services/userService');
 const { generateAgeDistributionReport } = require('./src/services/reportService')
@@ -54,7 +54,7 @@ app.post('/process-csv', async (req, res) => {
             reportGenerated: true
         });
 
-    } catch (error) {
+    } catch (error) { //show errors
         console.error('An error occured during CSV processing', error.message);
         res.status(500).json({
             message: 'Failed to process CSV and upload data',
@@ -71,37 +71,5 @@ app.listen(PORT, () => {
     console.log('Database connection was checked on starting.');
     
 });
-
-
-
-
-
-//testing
-// async function testCsvParser(){
-//     if(!CSV_FILE_PATH){
-//         console.error('CSV_FILE_PATH is incorrect');
-
-//     }
-
-//     console.log(`///\n attempting to parse csv from: ${CSV_FILE_PATH}`);
-
-//     try{
-
-//         const parsedData = await parseCsvFile(CSV_FILE_PATH);
-//         console.log('\n Parsed CSV data ');
-//         console.log(JSON.stringify(parsedData.slice(0,2), null, 2));
-//         if(parsedData.length > 2){
-//             console.log(`... and ${parsedData.length - 2} more records`);
-//         }
-//         console.log('----------------');
-
-
-
-//     }catch(error){
-//         console.error("error during csv parsing", error.message);
-
-//     }
-
-// }
 
 

@@ -1,4 +1,4 @@
-//to save the data in the person.users (db)
+//to save the data which is in json form(after converting) in the person.users (db)
 
 const db = require('../config/db');
 
@@ -12,11 +12,12 @@ async function insertUsers(users){
     let insertedRows = 0;
 
     try {
-        await client.query('BEGIN') //satrt the process
+        await client.query('BEGIN') //start the process
 
+        //parameterized sql query
         const insertQuery = `
         INSERT INTO public.users (name, age,address, additional_info)
-        VALUES ($1, $2, $3, $4)
+        VALUES ($1, $2, $3, $4)    
         RETURNING id;
         `;
 
