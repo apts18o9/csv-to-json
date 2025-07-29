@@ -26,4 +26,5 @@ A key constraint of this challenge was to implement the CSV parsing logic **with
 * **File System Operations:** Node.js `fs.promises`
 
 ## SCREENSHOT OF THE CONSOLE
-<img width="688" height="619" alt="Screenshot 2025-07-29 124409" src="https://github.com/user-attachments/assets/f046d86d-101c-4adb-a01e-86418e871553" />
+<img width="636" height="517" alt="Screenshot 2025-07-29 124849" src="https://github.com/user-attachments/assets/e185b6ef-045d-453e-a1b2-3d99ff0c2cb1" />
+
